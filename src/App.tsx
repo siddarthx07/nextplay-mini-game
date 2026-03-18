@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import type { GameState, Sport } from "./types";
 import { QUESTIONS, SPORT_CONFIGS } from "./data";
@@ -28,9 +28,16 @@ export default function App() {
   const questions = QUESTIONS[game.selectedSport];
   const currentQ = questions[game.currentQuestion];
 
+  const goHome = useCallback(() => {
+    resetAI();
+    setGame(DEFAULT_STATE);
+    window.history.pushState({ phase: "welcome" }, "");
+  }, [resetAI]);
+
   const startGame = useCallback((sport: Sport) => {
     resetAI();
     setGame({ ...DEFAULT_STATE, phase: "playing", selectedSport: sport });
+    window.history.pushState({ phase: "playing", sport }, "");
   }, [resetAI]);
 
   const handleAnswer = useCallback(
@@ -53,6 +60,7 @@ export default function App() {
     const isLast = game.currentQuestion >= questions.length - 1;
     if (isLast) {
       setGame((prev) => ({ ...prev, phase: "results", showFeedback: false }));
+      window.history.pushState({ phase: "results" }, "");
     } else {
       setGame((prev) => ({
         ...prev,
@@ -64,7 +72,17 @@ export default function App() {
   }, [game.currentQuestion, questions.length, resetAI]);
 
   const handleRestart = useCallback(() => startGame(game.selectedSport), [game.selectedSport, startGame]);
-  const handleChangeSport = useCallback(() => { resetAI(); setGame(DEFAULT_STATE); }, [resetAI]);
+  const handleChangeSport = goHome;
+
+  // Handle browser back button
+  useEffect(() => {
+    const handlePopState = () => {
+      resetAI();
+      setGame(DEFAULT_STATE);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, [resetAI]);
 
   return (
     <div

@@ -53,7 +53,7 @@ export function QuestionCard({
       {/* Header */}
       <div className="q-header">
         <div className="q-meta">
-          <button className="sport-tag" onClick={() => setShowQuitConfirm(true)} title="Back to menu">{sportEmoji} {question.category}</button>
+          <button className="sport-tag" onClick={() => setShowQuitConfirm(true)} title="Back to home">← Home</button>
           <span
             className="difficulty-tag"
             style={{ color: difficultyColor, borderColor: difficultyColor }}
