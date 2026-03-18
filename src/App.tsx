@@ -109,7 +109,6 @@ export default function App() {
               showFeedback={game.showFeedback}
               aiExplanation={explanation}
               aiLoading={aiLoading}
-              sportEmoji={currentSportConfig.emoji}
               sportAccent={currentSportConfig.accent}
               onAnswer={handleAnswer}
               onNext={handleNext}

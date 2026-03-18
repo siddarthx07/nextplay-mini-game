@@ -11,7 +11,6 @@ interface QuestionCardProps {
   showFeedback: boolean;
   aiExplanation: string | null;
   aiLoading: boolean;
-  sportEmoji: string;
   sportAccent: string;
   onAnswer: (index: number) => void;
   onNext: () => void;
@@ -27,7 +26,6 @@ export function QuestionCard({
   showFeedback,
   aiExplanation,
   aiLoading,
-  sportEmoji,
   sportAccent,
   onAnswer,
   onNext,
