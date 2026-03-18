@@ -95,6 +95,7 @@ export default function App() {
               sportAccent={currentSportConfig.accent}
               onAnswer={handleAnswer}
               onNext={handleNext}
+              onQuit={handleChangeSport}
             />
           )}
           {game.phase === "results" && (

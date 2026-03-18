@@ -1,5 +1,11 @@
 import { useState } from "react";
+import OpenAI from "openai";
 import type { Question } from "./types";
+
+const client = new OpenAI({
+  apiKey: import.meta.env.VITE_OPENAI_API_KEY,
+  dangerouslyAllowBrowser: true,
+});
 
 export function useAIExplain() {
   const [explanation, setExplanation] = useState<string | null>(null);
@@ -31,25 +37,21 @@ Correct answer: "${correctText}" ✅
 Respond in an encouraging, coach-like voice. Keep it under 60 words. Focus on the "why".`;
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system:
-            "You are an enthusiastic sports coach and educator. You make learning sports rules fun and memorable. Always be encouraging, even when a student gets something wrong.",
-          messages: [{ role: "user", content: prompt }],
-        }),
+      const response = await client.chat.completions.create({
+        model: "gpt-4o-mini",
+        max_tokens: 150,
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are an enthusiastic sports coach and educator. You make learning sports rules fun and memorable. Always be encouraging, even when a student gets something wrong.",
+          },
+          { role: "user", content: prompt },
+        ],
       });
 
-      const data = await response.json();
-      const text = data.content
-        ?.filter((b: { type: string }) => b.type === "text")
-        .map((b: { text: string }) => b.text)
-        .join("");
-
-      setExplanation(text || null);
+      const text = response.choices[0]?.message?.content ?? null;
+      setExplanation(text);
     } catch {
       setError("Coach is taking a water break — try again!");
     } finally {

@@ -4,8 +4,8 @@ export const SPORT_CONFIGS: Record<Sport, SportConfig> = {
   football: {
     name: "Football",
     emoji: "🏈",
-    color: "#1a4731",
-    accent: "#f5a623",
+    color: "#0a3a5c",
+    accent: "#0096E0",
   },
   basketball: {
     name: "Basketball",

@@ -14,6 +14,7 @@ interface QuestionCardProps {
   sportAccent: string;
   onAnswer: (index: number) => void;
   onNext: () => void;
+  onQuit: () => void;
 }
 
 export function QuestionCard({
@@ -29,6 +30,7 @@ export function QuestionCard({
   sportAccent,
   onAnswer,
   onNext,
+  onQuit,
 }: QuestionCardProps) {
   const isCorrect = selectedAnswer === question.correct;
 
@@ -49,7 +51,7 @@ export function QuestionCard({
       {/* Header */}
       <div className="q-header">
         <div className="q-meta">
-          <span className="sport-tag">{sportEmoji} {question.category}</span>
+          <button className="sport-tag" onClick={onQuit} title="Back to menu">{sportEmoji} {question.category}</button>
           <span
             className="difficulty-tag"
             style={{ color: difficultyColor, borderColor: difficultyColor }}

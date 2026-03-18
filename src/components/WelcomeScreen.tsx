@@ -21,7 +21,7 @@ export function WelcomeScreen({ sportConfigs, onStart }: WelcomeScreenProps) {
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
         >
-          <span className="logo-np">NP</span>
+          <img src="/nextplay-logo.png" alt="Next Play" className="logo-img" />
         </motion.div>
 
         <motion.h1
