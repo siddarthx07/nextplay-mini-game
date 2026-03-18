@@ -115,6 +115,17 @@ h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(72px, 12vw, 110px);
 .action-secondary:hover { background: var(--surface-hover); }
 .results-footer { font-size: 14px; color: var(--text-muted); letter-spacing: 0.5px; }
 
+/* Quit confirmation modal */
+.quit-overlay { position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.7); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; }
+.quit-modal { background: #13131a; border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 36px 32px; max-width: 400px; width: 100%; text-align: center; box-shadow: 0 24px 80px rgba(0,0,0,0.6); }
+.quit-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: #fff; letter-spacing: 1px; margin-bottom: 12px; }
+.quit-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.55; margin-bottom: 28px; }
+.quit-actions { display: flex; gap: 12px; }
+.quit-btn-cancel { flex: 1; background: var(--surface); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); cursor: pointer; transition: background 0.15s; }
+.quit-btn-cancel:hover { background: var(--surface-hover); }
+.quit-btn-confirm { flex: 1; background: #ef4444; border: none; border-radius: var(--radius); padding: 14px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #fff; cursor: pointer; transition: background 0.15s; }
+.quit-btn-confirm:hover { background: #dc2626; }
+
 @media (max-width: 600px) {
   .app-container { padding: 20px 14px; }
   h1 { font-size: 68px; }

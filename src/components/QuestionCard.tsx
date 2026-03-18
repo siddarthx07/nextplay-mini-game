@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Question } from "../types";
 
@@ -32,6 +33,7 @@ export function QuestionCard({
   onNext,
   onQuit,
 }: QuestionCardProps) {
+  const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const isCorrect = selectedAnswer === question.correct;
 
   const difficultyColor = {
@@ -51,7 +53,7 @@ export function QuestionCard({
       {/* Header */}
       <div className="q-header">
         <div className="q-meta">
-          <button className="sport-tag" onClick={onQuit} title="Back to menu">{sportEmoji} {question.category}</button>
+          <button className="sport-tag" onClick={() => setShowQuitConfirm(true)} title="Back to menu">{sportEmoji} {question.category}</button>
           <span
             className="difficulty-tag"
             style={{ color: difficultyColor, borderColor: difficultyColor }}
@@ -128,6 +130,34 @@ export function QuestionCard({
           );
         })}
       </div>
+
+      {/* Quit confirmation modal */}
+      <AnimatePresence>
+        {showQuitConfirm && (
+          <motion.div
+            className="quit-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <motion.div
+              className="quit-modal"
+              initial={{ scale: 0.85, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.85, opacity: 0, y: 20 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <p className="quit-title">End the quiz?</p>
+              <p className="quit-subtitle">Your progress will be lost. Are you sure you want to go back to the menu?</p>
+              <div className="quit-actions">
+                <button className="quit-btn-cancel" onClick={() => setShowQuitConfirm(false)}>Keep Playing</button>
+                <button className="quit-btn-confirm" onClick={onQuit}>End Quiz</button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Feedback section */}
       <AnimatePresence>
