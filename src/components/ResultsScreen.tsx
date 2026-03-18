@@ -154,7 +154,7 @@ export function ResultsScreen({
         </motion.button>
       </motion.div>
 
-      <p className="results-footer">Built for Next Play · Powered by Claude AI</p>
+      <p className="results-footer">Built for Next Play</p>
     </motion.div>
   );
 }

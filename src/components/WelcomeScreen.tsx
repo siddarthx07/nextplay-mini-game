@@ -82,7 +82,7 @@ export function WelcomeScreen({ sportConfigs, onStart }: WelcomeScreenProps) {
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          AI-powered explanations after every answer ✨
+          Smart coach explanations after every answer ✨
         </motion.p>
       </motion.div>
     </div>
