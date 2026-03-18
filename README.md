@@ -16,7 +16,7 @@ A sports trivia web app built with React, TypeScript, and Vite. Players pick a s
 - TypeScript
 - Vite
 - Framer Motion
-- OpenAI API (gpt-4o-mini)
+- OpenAI API (gpt-4o-mini) — used for AI coach responses after each answer
 
 ## Getting Started
 
